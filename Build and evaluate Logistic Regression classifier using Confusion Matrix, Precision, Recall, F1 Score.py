@@ -12,19 +12,15 @@ from sklearn.metrics import (
     classification_report
 )
 
-# Load dataset
+
 data = load_breast_cancer()
 X = pd.DataFrame(data.data, columns=data.feature_names)
 y = data.target
-# Split dataset
 X_train, X_test, y_train, y_test = train_test_split(
  X, y, test_size=0.3, random_state=42
 )
-# Create Logistic Regression model
 model = LogisticRegression(max_iter=5000)
-# Train model
 model.fit(X_train, y_train)
-# Predictions
 y_pred = model.predict(X_test)
 cm = confusion_matrix(y_test, y_pred)
 precision = precision_score(y_test, y_pred)

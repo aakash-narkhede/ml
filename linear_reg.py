@@ -6,22 +6,20 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import numpy as np
 
-# Load dataset
+
 diabetes = load_diabetes()
 X = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
 y = diabetes.target
-# Use only one feature (BMI)
+
 X = X[['bmi']]
-# Split data
 X_train, X_test, y_train, y_test = train_test_split(
  X, y, test_size=0.3, random_state=42
 )
-# Model
+
 model = LinearRegression()
 model.fit(X_train, y_train)
-# Prediction
 y_pred = model.predict(X_test)
-# Evaluation
+
 mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 rmse = np.sqrt(mse)
@@ -31,7 +29,7 @@ print("MAE:", mae)
 print("MSE:", mse)
 print("RMSE:", rmse)
 print("R2 Score:", r2)
-# Plot
+
 plt.scatter(X, y)
 plt.plot(X, model.predict(X), color='red')
 plt.xlabel("BMI")
